@@ -42,7 +42,10 @@ namespace CDEK_library
                 var json = await response.Content.ReadAsStringAsync();
                 var document = JsonDocument.Parse(json);
 
-                BodyOfResponce[] responces = JsonSerializer.Deserialize<BodyOfResponce[]>(document.RootElement.GetProperty("tariff_codes"));
+                if (document.RootElement.TryGetProperty("tariff_codes", out var tariffes) == false)
+                    throw new Exception("No available tariffes");
+
+                BodyOfResponce[] responces = JsonSerializer.Deserialize<BodyOfResponce[]>(tariffes);
 
                 var filteredTariffe = responces.Where(x => x.DeliveryMode == 1).OrderBy(x => x.DeliverySum);
 

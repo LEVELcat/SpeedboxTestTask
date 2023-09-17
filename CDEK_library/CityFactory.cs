@@ -40,10 +40,10 @@ namespace CDEK_library
 
                 var root = JsonDocument.Parse(json).RootElement;
 
-                var firstCity = root.EnumerateArray().First();
-
                 try
                 {
+                    var firstCity = root.EnumerateArray().First();
+
                     return JsonSerializer.Deserialize<City>(firstCity);
                 }
                 catch
