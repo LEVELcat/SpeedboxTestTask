@@ -12,7 +12,6 @@ namespace CDEK_library
     {
         public City City { get; private set; }
 
-
         public CityFactory(string Account, string SecurePassword, Guid FromFias) : base(Account, SecurePassword)
         {
             this.City = GetCityFromFias(FromFias);
